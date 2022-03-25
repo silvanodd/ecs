@@ -1,0 +1,38 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - AWS_ACCOUNT_ID=$(echo $CODEBUILD_BUILD_ARN | cut -f5 -d ':')
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/testproject2
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - DEV_ACCOUNT_ID="198345939301"
+      - PROD_ACCOUNT_ID="772077008168"
+  build:
+    commands:
+      - echo Creating task definition files for each Environment...
+      - sed "s/<account-id>/$DEV_ACCOUNT_ID/" taskdef.json > taskdef_dev.json
+      - sed "s/<account-id>/$PROD_ACCOUNT_ID/" taskdef.json > taskdef_prod.json 
+      - echo Creating appspec files for each Environment...
+      - sed "s/<account-id>/$DEV_ACCOUNT_ID/" appspec.yaml > appspec_dev.yaml
+      - sed "s/<account-id>/$PROD_ACCOUNT_ID/" appspec.yaml > appspec_prod.yaml 
+      - echo Building the Docker image at `date`...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - docker images
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '[{"name":"go-simplehttp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+artifacts:
+  files:
+    - appspec_*.yaml
+    - taskdef_*.json
+    - imageDetail.json
+

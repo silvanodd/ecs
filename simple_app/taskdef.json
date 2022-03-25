@@ -1,0 +1,48 @@
+{
+  "executionRoleArn": "arn:aws:iam::<account-id>:role/testproject_execution_role",
+  "taskRoleArn": "arn:aws:iam::<account-id>:role/testproject_task_role",
+  "family": "testproject_container",
+  "networkMode": "awsvpc",
+  "memory": "2048",
+  "cpu": "1024",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "testproject_ecsTask",
+          "awslogs-region": "eu-west-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 8000,
+          "protocol": "tcp",
+          "containerPort": 8000
+        }
+      ],
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "message",
+          "value": "--------------- This is an amazong website -----------------"
+        }
+      ],
+      "image": <IMAGE_NAME>,
+      "essential": true,
+      "name": "testproject_container"
+    }
+  ],
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  }
+}
+
