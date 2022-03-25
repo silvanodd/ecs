@@ -63,7 +63,7 @@ PROD_ACCOUNT_ID="<your prod account id>"
 
 Using the credentials created above commit the contents of the simple_app directory into CodeCommit
 
-..........
+...........
 
 
 
