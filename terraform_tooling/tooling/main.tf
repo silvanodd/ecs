@@ -5,6 +5,6 @@ provider "aws" {
 
 module "tooling" {
   source       = "../../"
-  environment  = "dev"
+  environment  = "tooling"
   project_name = "testproject2"
 }
