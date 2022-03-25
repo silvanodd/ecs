@@ -1,0 +1,18 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+**/.DS_STORE
+**/.idea
+**/*.iml
+
+**/.build-harness
+**/build-harness
+
+**/ssl
+
+
+**/AfterAllowTestTraffic.zip
