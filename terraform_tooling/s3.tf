@@ -25,7 +25,6 @@ resource "aws_s3_bucket_policy" "my_resource" {
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${module.label.id}_codebuild_service_role",
                     "arn:aws:iam::${var.dev_account_id}:role/${module.label.id}_code_pipeline_cross_account_role",
                     "arn:aws:iam::${var.prod_account_id}:role/${module.label.id}_code_pipeline_cross_account_role"
                     ]
