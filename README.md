@@ -4,7 +4,7 @@
 
 This project is illustrative of how to use terraform to build/deploy an app into ECS Fargate across multiple account with CodePipeline.
 
-[Diagram](./Diagram.jpg)
+![Diagram](./Diagram.jpg)
 <br>
 # Setup
 
