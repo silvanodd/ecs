@@ -33,7 +33,7 @@ In terraform_tooling edit variables.tf and add the dev and prod accout ids to "d
 
 login on the command line into the tooling account
 ```
-cd  terraform_tooling/environment/tooling
+cd  terraform_tooling/environment/tooling 
 terraform init
 terraform apply
 ```

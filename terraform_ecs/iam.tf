@@ -11,7 +11,7 @@ resource "aws_iam_role" "code_pipeline_cross_account_role" {
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::${var.tooling_account}:root"
+                "AWS": "arn:aws:iam::${var.tooling_account}:role/${module.label.id}_codepipeline_service_role"
             },
             "Action": "sts:AssumeRole"
         }
