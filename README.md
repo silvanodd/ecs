@@ -16,9 +16,11 @@ Create 3 AWS account, or use AWS Organisations to create 3 additional account.\
 <br><br>
 ## Deploy IAM roles in the dev/prod accounts
 
-Due to dependency issues, first some roles need to be created in the dev/prod accounts before the tooling account can be created. Login on the command line into the dev/prod accounts, repeat for each account
+Due to dependency issues, first some roles need to be created in the dev/prod accounts before the tooling account can be created. 
 
-In terraform_ecs edit variables.tf and add the tooling accout id to "tooling_account" variable
+- In terraform_ecs edit variables.tf and add your tooling accout id to "tooling_account" variable
+
+- Login on the command line into the dev/prod accounts, repeat for each account
 
 ```
 cd terraform_ecs/environment/<environment>
@@ -31,7 +33,7 @@ terraform apply --target module.ecs.aws_iam_role.code_pipeline_cross_account_rol
 
 In terraform_tooling edit variables.tf and add the dev and prod accout ids to "dev_account_id" and "prod_account_id" variable
 
-login on the command line into the tooling account
+- Login on the command line into the tooling account
 ```
 cd  terraform_tooling/environment/tooling 
 terraform init
@@ -40,7 +42,7 @@ terraform apply
 <br><br>
 ## Deploy the dev/prod accounts
 
-login on the command line into the dev/prod accounts, repeat for each account
+- Login on the command line into the dev/prod accounts, repeat for each account
 ```
 cd terraform_ecs/environment/<environment>
 terraform init
