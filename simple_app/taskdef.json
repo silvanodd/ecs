@@ -1,6 +1,6 @@
 {
-  "executionRoleArn": "arn:aws:iam::<account-id>:role/testproject_execution_role",
-  "taskRoleArn": "arn:aws:iam::<account-id>:role/testproject_task_role",
+  "executionRoleArn": "arn:aws:iam::<account-id>:role/testproject2_execution_role",
+  "taskRoleArn": "arn:aws:iam::<account-id>:role/testproject2_task_role",
   "family": "testproject_container",
   "networkMode": "awsvpc",
   "memory": "2048",
@@ -10,7 +10,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "testproject_ecsTask",
+          "awslogs-group": "testproject2_ecsTask",
           "awslogs-region": "eu-west-2",
           "awslogs-stream-prefix": "ecs"
         }
