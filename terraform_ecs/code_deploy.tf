@@ -20,7 +20,6 @@ resource "aws_codedeploy_deployment_group" "my_resource" {
   dynamic "blue_green_deployment_config" {
     for_each = var.environment != "dev" ? [] : [1]
     content {
-  # blue_green_deployment_config {
       deployment_ready_option {
         action_on_timeout    = "CONTINUE_DEPLOYMENT"
       }
@@ -36,7 +35,6 @@ resource "aws_codedeploy_deployment_group" "my_resource" {
   dynamic "blue_green_deployment_config" {
     for_each = var.environment != "prod" ? [] : [1]
     content {
-  # blue_green_deployment_config {
       deployment_ready_option {
         action_on_timeout    = "STOP_DEPLOYMENT"
         wait_time_in_minutes = "60"
