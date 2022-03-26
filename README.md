@@ -49,7 +49,7 @@ terraform init
 terraform apply 
 ```
 <br><br>
-## Create a IAM user to commit code top CodeCommit
+## Create a IAM user to commit code to CodeCommit
 
 add the policy testproject2_codecommit_user_policy to the user permissions\
 generate and download HTTPS Git credentials for AWS CodeCommit for the user
