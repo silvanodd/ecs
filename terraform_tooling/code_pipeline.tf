@@ -130,47 +130,41 @@ resource "aws_iam_policy" "codepipeline_service_policy" {
   description = "Policy for code pipeline"
   policy      = <<POLICY
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:*"
-            ],
-            "Resource":  "${aws_s3_bucket.my_resource.arn}/*"
-        },
-        {
-            "Action": [
-                "codecommit:CancelUploadArchive",
-                "codecommit:GetBranch",
-                "codecommit:GetCommit",
-                "codecommit:GetRepository",
-                "codecommit:GetUploadArchiveStatus",
-                "codecommit:UploadArchive"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Action": [
-                "codebuild:BatchGetBuilds",
-                "codebuild:StartBuild",
-                "codebuild:BatchGetBuildBatches",
-                "codebuild:StartBuildBatch"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Action": "sts:AssumeRole",
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:iam::${var.dev_account_id}:role/${module.label.id}_code_pipeline_cross_account_role",
-                "arn:aws:iam::${var.prod_account_id}:role/${module.label.id}_code_pipeline_cross_account_role"
-                ]
-        }
-    ],
-    "Version": "2012-10-17"
+	"Version": "2012-10-17",
+	"Statement": [{
+			"Effect": "Allow",
+			"Action": [
+				"s3:*"
+			],
+			"Resource": "${aws_s3_bucket.my_resource.arn}/*"
+		},
+		{
+			"Action": [
+				"codecommit:GetUploadArchiveStatus",
+				"codecommit:UploadArchive",
+				"codecommit:GetBranch",
+				"codecommit:GetCommit"
+			],
+			"Effect": "Allow",
+			"Resource": "${aws_codecommit_repository.my_resource.arn}"
+		},
+		{
+			"Action": [
+				"codebuild:StartBuild",
+        "codebuild:BatchGetBuilds"
+			],
+			"Effect": "Allow",
+			"Resource": "${aws_codebuild_project.my_resource.arn}"
+		},
+		{
+			"Action": "sts:AssumeRole",
+			"Effect": "Allow",
+			"Resource": [
+				"arn:aws:iam::${var.dev_account_id}:role/${module.label.id}_code_pipeline_cross_account_role",
+				"arn:aws:iam::${var.prod_account_id}:role/${module.label.id}_code_pipeline_cross_account_role"
+			]
+		}
+	]
 }
 POLICY
 }
