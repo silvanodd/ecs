@@ -130,13 +130,14 @@ resource "aws_iam_policy" "codepipeline_service_policy" {
   description = "Policy for code pipeline"
   policy      = <<POLICY
 {
+    "Version": "2012-10-17",
     "Statement": [
         {
+            "Effect": "Allow",
             "Action": [
                 "s3:*"
             ],
-            "Resource": "*",
-            "Effect": "Allow"
+            "Resource":  "${aws_s3_bucket.my_resource.arn}/*"
         },
         {
             "Action": [
