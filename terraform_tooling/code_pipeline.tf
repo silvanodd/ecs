@@ -151,7 +151,7 @@ resource "aws_iam_policy" "codepipeline_service_policy" {
 		{
 			"Action": [
 				"codebuild:StartBuild",
-        "codebuild:BatchGetBuilds"
+        			"codebuild:BatchGetBuilds"
 			],
 			"Effect": "Allow",
 			"Resource": "${aws_codebuild_project.my_resource.arn}"
