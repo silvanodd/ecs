@@ -38,5 +38,5 @@ variable "azs" {
 variable "tooling_account" {
   description = "aws tooling accunt number"
   type        = string
-  default     = "287398346110"
+  default     = "123456789012"
 }
