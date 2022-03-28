@@ -23,11 +23,11 @@ variable "environment" {
 variable "dev_account_id" {
   description = "aws dev accunt number"
   type        = string
-  default     = "198345939301"
+  default     = "123456789012"
 }
 
 variable "prod_account_id" {
   description = "aws production accunt number"
   type        = string
-  default     = "772077008168"
+  default     = "123456789012"
 }
