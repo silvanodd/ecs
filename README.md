@@ -2,7 +2,7 @@
 
 # Description
 
-This project is illustrative of how to use terraform to build and deploy an app into ECS Fargate across multiple AWS accounts with CodePipeline using blue green deployments.
+This project an example of how to use terraform to build and deploy an app into ECS Fargate across multiple AWS accounts with CodePipeline using blue green deployments.
 
 ![Diagram](./Diagram.jpg)
 <br>
